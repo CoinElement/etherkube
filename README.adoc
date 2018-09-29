@@ -77,6 +77,13 @@ kubectl logs --tail=10 -f <node-geth-XXXX>
 
 (it's safe to Ctrl-C at any moment, to detach from remote log)
 
+
+### shtftnet
+vim etherekube-config.yaml
+./bin/etherkube init
+./bin/etherkube deploy node-1(name that mached to the etherekube-config.yaml)
+
+
 ## License
 
 All configurations and running scripts are provided under Apache 2.0 license
