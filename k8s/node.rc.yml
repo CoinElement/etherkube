@@ -18,16 +18,21 @@ spec:
             fsType: ext4
       containers:
         - name: geth
-          image: "${docker_reg}/${project_id}/${node_type}-${node_source}:latest"
+          image: "shyftnetwork/testnet:standalone"
+          command: [ "sh", "-c"]
+          args:
+          - 'cd /go/src/github.com/ShyftEthereum/go-empyrean &&
+            ./shyft-cli/initShyftGeth.sh &&
+            ./shyft-cli/startShyftGeth.sh'
           ports:
             - name: rpc
               containerPort: 8545
             - name: p2p
               hostPort: ${node_port}
-              containerPort: 30303
+              containerPort: 31333
           env:
             - name: NODE_OPTIONS
               value: "${node_options}"
           volumeMounts:
-            - mountPath: /data
+            - mountPath: /go/src/github.com/ShyftEthereum/go-empyrean/shyftData
               name: blockchain
