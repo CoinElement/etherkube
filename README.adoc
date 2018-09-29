@@ -79,10 +79,12 @@ kubectl logs --tail=10 -f <node-geth-XXXX>
 
 
 ### shtftnet
+
+```
 vim etherekube-config.yaml
 ./bin/etherkube init
 ./bin/etherkube deploy node-1(name that mached to the etherekube-config.yaml)
-
+```
 
 ## License
 
