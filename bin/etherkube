@@ -58,10 +58,12 @@ function push_docker {
 
 function deploy {
     NODE=$1
-    DOCKER_TYPE=$(echo "\${node_type}-\${node_source}" | $BINS/config -n $NODE template)
+    # DOCKER_TYPE=$(echo "\${node_type}-\${node_source}" | $BINS/config -n $NODE template)
 
-    build $DOCKER_TYPE
-    push_docker $DOCKER_TYPE
+    # build $DOCKER_TYPE
+    # push_docker $DOCKER_TYPE
+    # build $1
+    # push_docker $1
     prepare $NODE
 }
 
