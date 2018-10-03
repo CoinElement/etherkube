@@ -8,6 +8,7 @@ nodes:
   - id: node-1
     type: geth
     source: stable
+    options: --bootnodes enode://db9636cf1e8a61c0d55301f4f92b49576f48bc793b87bc23acb2b95a1bfe3ba4404f8ca5ef8fe7539a587bdcecbec72aacfc3c067d426b488ede0afec291a225@18.136.86.171:31333
     port: 31333
   - id: node-2
     type: geth
