@@ -13,7 +13,7 @@ nodes:
     type: geth
     source: repo
     build: 65f1fbc
-    options: "--cache 2048"
+    envs: "--cache 2048"
   - id: node-3
     type: parity
     source: provided

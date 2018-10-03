@@ -31,8 +31,8 @@ spec:
               hostPort: ${node_port}
               containerPort: 31333
           env:
-            - name: NODE_OPTIONS
-              value: "${node_options}"
+            - name: NODE_ENVS
+              value: "${node_envs}"
           volumeMounts:
             - mountPath: /go/src/github.com/ShyftEthereum/go-empyrean/shyftData
               name: blockchain
