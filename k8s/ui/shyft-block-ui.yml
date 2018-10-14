@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: node-${id}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        type: node
+        name: node-${id}
+        node-type: ${node_type}
+      containers:
+        - name: shyft_block_ui
+          image: shyftnetwork/shyft_block_ui:0.2
+          ports:
+            - name: api_port
+              hostPort: ${node_port}
+              containerPort: 3000
+          env:
+            - name: NODE_ENVS
+              value: '${node_envs}'

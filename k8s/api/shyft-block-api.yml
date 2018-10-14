@@ -10,15 +10,9 @@ spec:
         type: node
         name: node-${id}
         node-type: ${node_type}
-    spec:
-      volumes:
-        - name: blockchain
-          gcePersistentDisk:
-            pdName: ${id}-disk
-            fsType: ext4
       containers:
-        - name: geth
-           image: shyftnetwork/shyft_block_api:0.2
+        - name: shyft_block_api
+          image: shyftnetwork/shyft_block_api:0.2
           command: ['sh', '-c']
           workingDir: /go/src/github.com/ShyftNetwork/go-empyrean/shyftBlockExplorerApi
           args:
