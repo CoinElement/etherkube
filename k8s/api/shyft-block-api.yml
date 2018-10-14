@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: node-${id}
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        type: node
+        name: node-${id}
+        node-type: ${node_type}
+    spec:
+      volumes:
+        - name: blockchain
+          gcePersistentDisk:
+            pdName: ${id}-disk
+            fsType: ext4
+      containers:
+        - name: geth
+           image: shyftnetwork/shyft_block_api:0.2
+          command: ['sh', '-c']
+          workingDir: /go/src/github.com/ShyftNetwork/go-empyrean/shyftBlockExplorerApi
+          args:
+            - 'pwd && govendor remove github.com/ShyftNetwork/go-empyrean/crypto/secp256k1/^ &&
+            govendor fetch github.com/ShyftNetwork/go-empyrean/crypto/secp256k1/^  &&
+            /wait-for.sh ${pg_host}:5432 &&
+            DBENV=docker export DBENV &&
+            go run -v *.go'
+          ports:
+            - name: api_port
+              hostPort: ${node_port}
+              containerPort: 8080
+          env:
+            - name: NODE_ENVS
+              value: '${node_envs}'

@@ -18,12 +18,12 @@ spec:
             fsType: ext4
       containers:
         - name: geth
-          image: "shyftnetwork/testnet:standalone"
-          command: [ "sh", "-c"]
+          image: 'shyftnetwork/testnet:0.2'
+          command: ['sh', '-c']
           args:
-          - 'cd /go/src/github.com/ShyftEthereum/go-empyrean &&
-            ./shyft-cli/initShyftGeth.sh &&
-            ./bin/geth --config config.toml ${node_options}'
+            - 'cd /go/src/github.com/ShyftEthereum/go-empyrean &&
+              ./shyft-cli/initShyftGeth.sh &&
+              ./bin/geth --config config.toml ${node_options}'
           ports:
             - name: rpc
               containerPort: 8545
@@ -32,7 +32,17 @@ spec:
               containerPort: 31333
           env:
             - name: NODE_ENVS
-              value: "${node_envs}"
+              value: '${node_envs}'
           volumeMounts:
             - mountPath: /go/src/github.com/ShyftEthereum/go-empyrean/shyftData
               name: blockchain
+        - name: shyftnetwork-pg
+          image: shyftnetwork/pg:0.2
+          ports:
+            - name: pg_port
+              containerPort: ${node_pg_port}
+          env:
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: docker
