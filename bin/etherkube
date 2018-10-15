@@ -146,6 +146,33 @@ function control_proxy {
     echo "Open your browser and go to : http://localhost:8001/api/v1/proxy/namespaces/default/services/$NODE"
 }
 
+
+
+function dashboard_deploy {
+    APP=$1
+    ORG=etherkube
+    FILE=$(echo "$K8S/dashboard/$APP.rc.yml")
+    cat $FILE \
+        | $BINS/config -n $APP template \
+        | kubectl create -f -
+    echo "Pod $APP has been deployed."
+}
+
+function dashboard_start_service {
+    APP=$1
+    FILE=$(echo "$K8S/dashboard/$APP.srv.yml")
+    cat $FILE \
+        | $BINS/config -n $APP template \
+        | kubectl create -f -
+    echo "Service $APP has been started."
+}
+
+function dashboard_stop_service {
+    NODE=$1
+    kubectl delete service $NODE
+    echo "Service $NODE has been stopped."
+}
+
 case "$COMMAND" in
     build)
         build $2
@@ -191,6 +218,28 @@ case "$COMMAND" in
                 echo Usage
                 echo ""
                 echo "./bin/etherkube control deploy nginx"
+            ;;
+        esac
+        ;;
+    dashboard)
+        CONTROLCMD=$2
+        case "$CONTROLCMD" in
+            deploy)
+                dashboard_deploy $3
+                kubectl get pods -o wide
+            ;;
+            start-service)
+                dashboard_start_service $3
+                kubectl get svc -o wide
+            ;;
+            stop-service)
+                dashboard_stop_service $3
+                kubectl get svc -o wide
+            ;;
+            help)
+                echo Usage
+                echo ""
+                echo "./bin/etherkube control deploy shyft-block-api"
             ;;
         esac
         ;;
