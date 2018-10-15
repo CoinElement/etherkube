@@ -6,7 +6,9 @@ metadata:
   name: node-${id}-svc
 spec:
   ports:
-  - port: 8545
-    name: rpc
+    - port: 5432
+      name: pg
+  # - port: 8545
+  # name: rpc
   selector:
     name: node-${id}

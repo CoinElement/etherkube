@@ -21,7 +21,7 @@ spec:
           image: 'shyftnetwork/testnet:0.2'
           command: ['sh', '-c']
           args:
-            - 'cd /go/src/github.com/ShyftEthereum/go-empyrean &&
+            - 'cd /go/src/ShyftNetwork/go-empyrean &&
               ./shyft-cli/initShyftGeth.sh &&
               ./bin/geth --config config.toml ${node_options}'
           ports:
