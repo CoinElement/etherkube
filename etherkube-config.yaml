@@ -26,7 +26,7 @@ nodes:
   - id: shyft-block-api
     type: block-api
     source: stable
-    pgHost: node-node1-svc
+    pgHost: node-node-1-svc
     port: 8080
   - id: shyft-block-ui
     type: block-ui
