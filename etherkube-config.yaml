@@ -20,3 +20,13 @@ nodes:
     type: parity
     source: provided
     chain: testnet
+  - id: shyft-block-api
+    type: block-api
+    source: stable
+    pgHost: pg
+    port: 8080
+  - id: shyft-block-ui
+    type: block-ui
+    source: stable
+    pgHost: pg
+    port: 3000

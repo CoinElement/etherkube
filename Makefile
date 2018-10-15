@@ -1,4 +1,4 @@
-all: config.compile config.install ui.prepare ui.compile
+all: config.compile config.install
 
 dist: config.dist ui.dist zip
 
