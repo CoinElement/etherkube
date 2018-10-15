@@ -12,14 +12,17 @@ nodes:
     port: 31333
     pgPort: 5432
   - id: node-2
-    type: shyftnet-api
-    source: repo
-    build: 65f1fbc
-    envs: '--cache 2048'
+    type: geth
+    source: stable
+    options: --gcmode archive --ws --wsaddr="0.0.0.0" --wsorigins "*" --nat=any --minerthreads 4 --targetgaslimit 80000000 --bootnodes enode://e8e2053ccd176ffd04f663ad675cce7038666b4c0fbadc4bf18ffcef2b75a9482acdbc8a9e9ce649b4a819811636ee946b9963db669f959f1e00e616b8cafa21@18.213.224.80:31333 --bootnodes enode://db9636cf1e8a61c0d55301f4f92b49576f48bc793b87bc23acb2b95a1bfe3ba4404f8ca5ef8fe7539a587bdcecbec72aacfc3c067d426b488ede0afec291a225@18.136.86.171:31333
+    port: 31333
+    pgPort: 5432
   - id: node-3
-    type: parity
-    source: provided
-    chain: testnet
+    type: geth
+    source: stable
+    options: --gcmode archive --ws --wsaddr="0.0.0.0" --wsorigins "*" --nat=any --minerthreads 4 --targetgaslimit 80000000 --bootnodes enode://e8e2053ccd176ffd04f663ad675cce7038666b4c0fbadc4bf18ffcef2b75a9482acdbc8a9e9ce649b4a819811636ee946b9963db669f959f1e00e616b8cafa21@18.213.224.80:31333 --bootnodes enode://db9636cf1e8a61c0d55301f4f92b49576f48bc793b87bc23acb2b95a1bfe3ba4404f8ca5ef8fe7539a587bdcecbec72aacfc3c067d426b488ede0afec291a225@18.136.86.171:31333
+    port: 31333
+    pgPort: 5432
   - id: shyft-block-api
     type: block-api
     source: stable
