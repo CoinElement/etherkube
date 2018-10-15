@@ -3,7 +3,8 @@ kind: Service
 metadata:
   labels:
     type: node-svc
-  name: node-${id}-svc
+  name: pg
+  # name: node-${id}-svc
 spec:
   ports:
     - port: 5432
