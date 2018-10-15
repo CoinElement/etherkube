@@ -39,7 +39,7 @@ spec:
         - name: shyftnetwork-pg
           image: shyftnetwork/pg:0.2
           ports:
-            - name: pg_port
+            - name: pg-port
               containerPort: ${node_pg_port}
           env:
             - name: POSTGRES_USER
