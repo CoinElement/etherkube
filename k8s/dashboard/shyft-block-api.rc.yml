@@ -10,8 +10,9 @@ spec:
         type: node
         name: node-${id}
         node-type: ${node_type}
+    spec:
       containers:
-        - name: shyft_block_api
+        - name: shyft-block-api
           image: shyftnetwork/shyft_block_api:0.2
           command: ['sh', '-c']
           workingDir: /go/src/github.com/ShyftNetwork/go-empyrean/shyftBlockExplorerApi
@@ -22,7 +23,7 @@ spec:
             DBENV=docker export DBENV &&
             go run -v *.go'
           ports:
-            - name: api_port
+            - name: api-port
               hostPort: ${node_port}
               containerPort: 8080
           env:

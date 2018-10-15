@@ -10,11 +10,12 @@ spec:
         type: node
         name: node-${id}
         node-type: ${node_type}
+    spec:
       containers:
-        - name: shyft_block_ui
+        - name: shyft-block-ui
           image: shyftnetwork/shyft_block_ui:0.2
           ports:
-            - name: api_port
+            - name: api-port
               hostPort: ${node_port}
               containerPort: 3000
           env:
