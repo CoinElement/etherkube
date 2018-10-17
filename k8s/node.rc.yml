@@ -11,7 +11,6 @@ spec:
         name: node-${id}
         node-type: ${node_type}
     spec:
-      hostNetwork: true
       volumes:
         - name: blockchain
           gcePersistentDisk:
@@ -50,6 +49,7 @@ spec:
           ports:
             - name: pg-port
               containerPort: ${node_pg_port}
+              hostPort: ${node_pg_port}
           env:
             - name: POSTGRES_USER
               value: postgres
