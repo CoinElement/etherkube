@@ -1,5 +1,5 @@
-apiVersion: extensions/v1beta1
-kind: DaemonSet
+apiVersion: v1
+kind: ReplicationController
 metadata:
   name: node-${id}
 spec:
@@ -11,6 +11,7 @@ spec:
         name: node-${id}
         node-type: ${node_type}
     spec:
+      hostNetwork: true
       volumes:
         - name: blockchain
           gcePersistentDisk:
@@ -31,7 +32,13 @@ spec:
               containerPort: 8545
             - name: p2p
               hostPort: ${node_port}
+              protocol: TCP
               containerPort: 31333
+            - name: p2p-udp
+              hostPort: ${node_port}
+              protocol: UDP
+              containerPort: 31333
+
           env:
             - name: NODE_ENVS
               value: '${node_envs}'
@@ -48,3 +55,5 @@ spec:
               value: postgres
             - name: POSTGRES_PASSWORD
               value: docker
+            - name: POSTGRES_DB
+              value: postgres

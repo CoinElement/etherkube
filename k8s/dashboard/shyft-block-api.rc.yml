@@ -19,7 +19,7 @@ spec:
           args:
             - 'pwd && govendor remove github.com/ShyftNetwork/go-empyrean/crypto/secp256k1/^ &&
             govendor fetch github.com/ShyftNetwork/go-empyrean/crypto/secp256k1/^  &&
-            /wait-for.sh ${node_pg_host}:5432 &&
+            /wait-for.sh pg:5432 &&
             DBENV=docker export DBENV &&
             go run -v *.go'
           ports:

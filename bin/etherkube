@@ -95,8 +95,9 @@ function stop {
     SVC_ID=$(echo "node-\${id}-svc" | $BINS/config -n $NODE template)
     RC_ID=$(echo "node-\${id}" | $BINS/config -n $NODE template)
     echo "Delete service $SVC_ID and controller $RC_ID"
-    kubectl delete rc $RC_ID
-    kubectl delete svc $SVC_ID
+    kubectl delete rc $RC_ID | echo ""
+    kubectl delete svc $SVC_ID | echo ""
+    kubectl delete svc pg | echo ""
 
     echo "Wait for RC deletion..."
     sleep 30
