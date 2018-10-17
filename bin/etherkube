@@ -149,26 +149,26 @@ function control_proxy {
 
 
 
-function dashboard_deploy {
+function block_explorer_deploy {
     APP=$1
     ORG=etherkube
-    FILE=$(echo "$K8S/dashboard/$APP.rc.yml")
+    FILE=$(echo "$K8S/block-explorer/$APP.rc.yml")
     cat $FILE \
         | $BINS/config -n $APP template \
         | kubectl create -f -
     echo "Pod $APP has been deployed."
 }
 
-function dashboard_start_service {
+function block_explorer_start_service {
     APP=$1
-    FILE=$(echo "$K8S/dashboard/$APP.srv.yml")
+    FILE=$(echo "$K8S/block-explorer/$APP.srv.yml")
     cat $FILE \
         | $BINS/config -n $APP template \
         | kubectl create -f -
     echo "Service $APP has been started."
 }
 
-function dashboard_stop_service {
+function block_explorer_stop_service {
     NODE=$1
     kubectl delete service $NODE
     echo "Service $NODE has been stopped."
@@ -222,19 +222,19 @@ case "$COMMAND" in
             ;;
         esac
         ;;
-    dashboard)
+    block-explorer)
         CONTROLCMD=$2
         case "$CONTROLCMD" in
             deploy)
-                dashboard_deploy $3
+                block_explorer_deploy $3
                 kubectl get pods -o wide
             ;;
             start-service)
-                dashboard_start_service $3
+                block_explorer_start_service $3
                 kubectl get svc -o wide
             ;;
             stop-service)
-                dashboard_stop_service $3
+                block_explorer_stop_service $3
                 kubectl get svc -o wide
             ;;
             help)
