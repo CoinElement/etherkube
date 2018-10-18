@@ -3,13 +3,13 @@ kind: Service
 metadata:
   labels:
     type: node-svc
-  name: pg
-  # name: node-${id}-svc
+  name: node-${id}-svc
 spec:
   ports:
     - port: 5432
+      targetPort: 5432
       name: pg
-  # - port: 8545
-  # name: rpc
+    - port: 8545
+      name: rpc
   selector:
     name: node-${id}

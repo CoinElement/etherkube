@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: "${docker_reg}/${project_id}/nginx:latest"
+          image: '${docker_reg}/${project_id}/nginx:latest'
           ports:
             - name: web-http
               containerPort: 80
