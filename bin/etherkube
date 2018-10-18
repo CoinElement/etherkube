@@ -36,6 +36,10 @@ function prepare {
     cat $FILE \
         | $BINS/config -n $NODE template \
         | kubectl create -f -
+    PGSVC=$(kubectl get svc -o name | grep "service/pg")
+    if [[ -z $PGSVC ]];then
+        kubectl apply -f "$K8S/pg.svc.yml"
+    fi
 }
 
 function build {
