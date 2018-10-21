@@ -33,3 +33,7 @@ nodes:
     source: stable
     pgHost: pg
     port: 3000
+  - id: shyft-block-frontend
+    type: block-frontend
+    source: stable
+    port: 80

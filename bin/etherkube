@@ -156,6 +156,13 @@ function control_proxy {
 function block_explorer_deploy {
     APP=$1
     ORG=etherkube
+    if [ $APP == "shyft-block-frontend" ]; then
+        echo "compiling frontend with nginx"
+        docker build -t gcr.io/$GCLOUD_PROJECT_ID/$APP:latest ./containers/$APP
+        # gcloud docker -- push gcr.io/$GCLOUD_PROJECT_ID/$APP:latest
+        docker push gcr.io/$GCLOUD_PROJECT_ID/$APP:latest
+    fi
+
     FILE=$(echo "$K8S/block-explorer/$APP.rc.yml")
     cat $FILE \
         | $BINS/config -n $APP template \

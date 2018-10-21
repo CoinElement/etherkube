@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    name: service-block-explorer
+  name: service-block-explorer
+  # namespace: default
+spec:
+  ports:
+    - name: block-api
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+    - name: block-ui
+      port: 4000
+      portocal: TCP
+      targetPort: 80
+  selector:
+    shyft-app: block-explorer-frontend
+  sessionAffinity: None
+  type: LoadBalancer
