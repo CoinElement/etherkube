@@ -15,5 +15,7 @@ spec:
         - name: nginx
           image: '${docker_reg}/${project_id}/nginx:latest'
           ports:
-            - name: web-http
+            - name: web-http-ui
               containerPort: 80
+            - name: web-http-api
+              containerPort: 8080
