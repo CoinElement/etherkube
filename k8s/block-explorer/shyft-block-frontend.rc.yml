@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: '${docker_reg}/${project_id}/nginx:latest'
+          image: '${docker_reg}/${project_id}/${id}:latest'
           imagePullPolicy: Always
           ports:
             - name: web-http-ui
