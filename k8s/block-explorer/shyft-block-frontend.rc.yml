@@ -14,6 +14,7 @@ spec:
       containers:
         - name: nginx
           image: '${docker_reg}/${project_id}/nginx:latest'
+          imagePullPolicy: Always
           ports:
             - name: web-http-ui
               containerPort: 80
