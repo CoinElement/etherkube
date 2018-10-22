@@ -172,7 +172,7 @@ function block_explorer_deploy {
 
 function block_explorer_start_service {
     APP=$1
-    FILE=$(echo "$K8S/block-explorer/$APP.srv.yml")
+    FILE=$(echo "$K8S/block-explorer/$APP.svc.yml")
     cat $FILE \
         | $BINS/config -n $APP template \
         | kubectl create -f -
