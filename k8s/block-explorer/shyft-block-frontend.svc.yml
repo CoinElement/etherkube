@@ -13,7 +13,7 @@ spec:
       targetPort: 8080
     - name: block-ui
       port: 4000
-      portocal: TCP
+      protocol: TCP
       targetPort: 80
   selector:
     shyft-app: block-explorer-frontend
