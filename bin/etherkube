@@ -157,6 +157,7 @@ function control_proxy {
 function block_explorer_deploy {
     APP=$1
     ORG=etherkube
+    echo "deploying pods: $1"
     if [ $APP == "shyft-block-frontend" ]; then
         echo "compiling frontend with nginx"
         docker build -t gcr.io/$GCLOUD_PROJECT_ID/$APP:latest ./containers/$APP
