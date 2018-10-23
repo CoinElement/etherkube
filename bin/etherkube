@@ -283,6 +283,9 @@ case "$COMMAND" in
             ;;
             stop)
                 block_explorer_stop
+                sleep 3
+                kubectl get pods -o wide
+                kubectl get svc -o wide
             ;;
             help)
                 echo Usage
