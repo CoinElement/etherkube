@@ -298,6 +298,11 @@ case "$COMMAND" in
                 deploy $3
                 kubectl get pods -o wide
             ;;
+            stop)
+                stop $3
+                kubectl get pods -o wide
+                kubectl get svc -o wide
+            ;;
             help)
                 echo Usage
                 echo ""
