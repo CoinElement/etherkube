@@ -182,16 +182,16 @@ function block_explorer_start_service {
 
 function block_explorer_start {
     echo "creating shyft-block-api"
-    block_explorer_deploy shyft-block-api
-    block_explorer_start_service shyft-block-api
+    block_explorer_deploy shyft-block-api | echo ""
+    block_explorer_start_service shyft-block-api | echo ""
 
     echo "creating shyft-block-ui"
-    block_explorer_deploy shyft-block-ui
-    block_explorer_start_service shyft-block-ui
+    block_explorer_deploy shyft-block-ui | echo ""
+    block_explorer_start_service shyft-block-ui | echo ""
 
     echo "creating shyft-block-frontend"
-    block_explorer_deploy shyft-block-frontend
-    block_explorer_start_service shyft-block-frontend
+    block_explorer_deploy shyft-block-frontend | echo ""
+    block_explorer_start_service shyft-block-frontend | echo ""
 }
 
 function block_explorer_stop {
@@ -199,8 +199,8 @@ function block_explorer_stop {
     echo "Deleting service for sershyft-block-frontend, shyft-block-ui and shyft-block-api"
 
     kubectl delete service service-block-explorer | echo ""
-    kubectl delete service shyft-block-ui-svc | echo ""
-    kubectl delete service shyft-block-api-svc | echo ""
+    kubectl delete service block-explorer-ui-svc | echo ""
+    kubectl delete service block-explorer-api-svc| echo ""
     echo "Deleting service done."
 
     echo "Deleting pods for shyft-block-frontend, shyft-block-ui and shyft-block-api"
