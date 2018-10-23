@@ -10,7 +10,7 @@ spec:
         type: node
         name: node-${id}
         node-type: ${node_type}
-        shyft-app: shyft-net
+        shyft-app: shyftnet-node
     spec:
       volumes:
         - name: blockchain
