@@ -35,7 +35,7 @@ function prepare {
     cat $FILE \
         | $BINS/config -n $NODE template \
         | kubectl create -f - || echo "service for $1 exists"
-    PGSVC=$(kubectl get svc -o name | grep "service/pg")
+    PGSVC=$(kubectl get svc -l type=pg-svc -o name)
 
     if [ -z "$PGSVC" ]; then
         echo "deploying pg service"
