@@ -180,6 +180,37 @@ function block_explorer_start_service {
     echo "Service $APP has been started."
 }
 
+function block_explorer_start {
+    echo "creating shyft-block-api"
+    block_explorer_deploy shyft-block-api
+    block_explorer_start_service shyft-block-api
+
+    echo "creating shyft-block-ui"
+    block_explorer_deploy shyft-block-ui
+    block_explorer_start_service shyft-block-ui
+
+    echo "creating shyft-block-frontend"
+    block_explorer_deploy shyft-block-frontend
+    block_explorer_start_service shyft-block-frontend
+}
+
+function block_explorer_stop {
+
+    echo "Deleting service for sershyft-block-frontend, shyft-block-ui and shyft-block-api"
+
+    kubectl delete service shyft-block-frontend
+    kubectl delete service shyft-block-ui
+    kubectl delete service shyft-block-api
+    echo "Deleting service done."
+
+    echo "Deleting pods for shyft-block-frontend, shyft-block-ui and shyft-block-api"
+    kubectl delete rc shyft-block-frontend | echo ""
+    kubectl delete svc shyft-block-ui | echo ""
+    kubectl delete svc shyft-block-api | echo ""
+    echo "Deleting pods done."
+
+}
+
 function block_explorer_stop_service {
     NODE=$1
     kubectl delete service $NODE
@@ -193,10 +224,15 @@ case "$COMMAND" in
     deploy)
         deploy $2
         kubectl get pods -o wide
+        echo "Wait for pod $2 spawning..."
+        sleep 10
+        block_explorer_start
+
+        kubectl get all
+        kubectl get svc -o wide
         ;;
     stop)
         stop $2
-        kubectl get pods -o wide
         kubectl get pods -o wide
         kubectl get svc -o wide
         ;;
@@ -237,22 +273,34 @@ case "$COMMAND" in
     block-explorer)
         CONTROLCMD=$2
         case "$CONTROLCMD" in
-            deploy)
-                block_explorer_deploy $3
-                kubectl get pods -o wide
+            start)
+                block_explorer_start
+                # block_explorer_deploy $3
+                # kubectl get pods -o wide
+                # block_explorer_start_service $3
+                # kubectl get svc -o wide
             ;;
-            start-service)
-                block_explorer_start_service $3
-                kubectl get svc -o wide
-            ;;
-            stop-service)
-                block_explorer_stop_service $3
-                kubectl get svc -o wide
+            stop)
+                block_explorer_stop
             ;;
             help)
                 echo Usage
                 echo ""
-                echo "./bin/etherkube control deploy shyft-block-api"
+                echo "./bin/etherkube block-explorer start"
+            ;;
+        esac
+        ;;
+    shyftnet)
+        CONTROLCMD=$2
+        case "$CONTROLCMD" in
+            deploy)
+                deploy $3
+                kubectl get pods -o wide
+            ;;
+            help)
+                echo Usage
+                echo ""
+                echo "./bin/etherkube block-explorer deploy shyft-block-api"
             ;;
         esac
         ;;
