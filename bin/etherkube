@@ -198,9 +198,9 @@ function block_explorer_stop {
 
     echo "Deleting service for sershyft-block-frontend, shyft-block-ui and shyft-block-api"
 
-    kubectl delete service service-block-explorer
-    kubectl delete service shyft-block-ui-svc
-    kubectl delete service shyft-block-api-svc
+    kubectl delete service service-block-explorer | echo ""
+    kubectl delete service shyft-block-ui-svc | echo ""
+    kubectl delete service shyft-block-api-svc | echo ""
     echo "Deleting service done."
 
     echo "Deleting pods for shyft-block-frontend, shyft-block-ui and shyft-block-api"
