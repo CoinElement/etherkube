@@ -168,7 +168,7 @@ function block_explorer_deploy {
     FILE=$(echo "$K8S/block-explorer/$APP.rc.yml")
     cat $FILE \
         | $BINS/config -n $APP template \
-        | kubectl create -f -
+        | kubectl create -f - || echo "pods: $APP exists"
     echo "Pod $APP has been deployed."
 }
 
@@ -183,16 +183,21 @@ function block_explorer_start_service {
 
 function block_explorer_start {
     echo "creating shyft-block-api"
-    block_explorer_deploy shyft-block-api | echo ""
-    block_explorer_start_service shyft-block-api | echo ""
+    block_explorer_deploy shyft-block-api
+    block_explorer_start_service shyft-block-api
+    echo "creating shyft-block-api done"
+
 
     echo "creating shyft-block-ui"
-    block_explorer_deploy shyft-block-ui | echo ""
-    block_explorer_start_service shyft-block-ui | echo ""
+    block_explorer_deploy shyft-block-ui
+    block_explorer_start_service shyft-block-ui
+    echo "creating shyft-block-ui done"
+
 
     echo "creating shyft-block-frontend"
-    block_explorer_deploy shyft-block-frontend | echo ""
-    block_explorer_start_service shyft-block-frontend | echo ""
+    block_explorer_deploy shyft-block-frontend
+    block_explorer_start_service shyft-block-frontend
+    echo "creating shyft-block-frontend done"
 }
 
 function block_explorer_stop {
