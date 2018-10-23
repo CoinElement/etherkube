@@ -3,6 +3,7 @@ kind: Service
 metadata:
   labels:
     type: node-svc
+    shyft-svc: node-svc
   name: node-${id}-svc
 spec:
   ports:
