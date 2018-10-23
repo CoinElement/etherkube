@@ -26,19 +26,20 @@ function prepare {
     DISK=$(echo "\${id}-disk" | $BINS/config -n $NODE template)
     echo "Create disk $DISK for $NODE"
     GDISK=$(gcloud compute disks create $DISK --type pd-ssd --size 50GB || echo "disk exists")
-
     FILE=$(echo "$K8S/node.rc.yml" | $BINS/config -n $NODE template)
     echo "Deploy kubes $NODE from $FILE"
     cat $FILE \
         | $BINS/config -n $NODE template \
-        | kubectl create -f -
-    FILE=$(echo "$K8S/node.svc.yml" | $BINS/config -n $NODE template)
+        | kubectl create -f - || echo "node: $1 exists"
+    FILE=$(echo "$K8S/node.svc.yml" | $BINS/config -n $NODE template || echo "service for $1 exists")
     cat $FILE \
         | $BINS/config -n $NODE template \
-        | kubectl create -f -
+        | kubectl create -f - || echo "service for $1 exists"
     PGSVC=$(kubectl get svc -o name | grep "service/pg")
-    if [[ -z $PGSVC ]];then
-        kubectl apply -f "$K8S/pg.svc.yml"
+
+    if [ -z "$PGSVC" ]; then
+        echo "deploying pg service"
+        kubectl apply -f "$K8S/pg.svc.yml" || echo "service pg exists"
     fi
 }
 
