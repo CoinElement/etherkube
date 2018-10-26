@@ -86,6 +86,11 @@ vim etherekube-config.yaml
 ./bin/etherkube deploy node-1(name that mached to the etherekube-config.yaml)
 ```
 
+#### Architecture
+
+image::https://raw.githubusercontent.com/CoinElement/etherkube/shyftnet/Architecture.png[Architecture]
+
+
 ## License
 
 All configurations and running scripts are provided under Apache 2.0 license
